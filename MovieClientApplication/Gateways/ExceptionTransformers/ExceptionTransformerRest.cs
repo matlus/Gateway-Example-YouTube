@@ -36,17 +36,20 @@ namespace MovieClientApplication.Gateways.ExceptionTransformers
 
             IEnumerable<string> exceptionTypeHeaders;
             httpResponseMessage.Headers.TryGetValues("Exception-Type", out exceptionTypeHeaders);
-            var exceptionName = (exceptionTypeHeaders != null) ? exceptionTypeHeaders.First() : string.Empty;
+            string exceptionName = (exceptionTypeHeaders != null) ? exceptionTypeHeaders.First() : null;
 
-            if (exceptionName != null)
+            switch (exceptionName)
             {
-                switch (exceptionName)
-                {
-                    case "InvalidGenreException":
-                        throw new InvalidGenreException(reasonPhrase + "\r\n" + noticesMessage);
-                    default:
-                        break;
-                }
+                case null:
+                    //// This should never happen if the services don't change/break their API.
+                    //// That is, all Error status code MUST have an Exception-Type header
+                    //// But one could easily throw some exception here since the reasonPhrase and noticeMessage
+                    //// have values
+                    break;
+                case "InvalidGenreException":
+                    throw new InvalidGenreException(reasonPhrase + "\r\n" + noticesMessage);
+                default:
+                    break;
             }
         }
 
