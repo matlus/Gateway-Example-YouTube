@@ -7,6 +7,6 @@ Additionally, you’ll also learn about the roles and responsibilities of the Ga
 
 ## Article
 
-Read [The Gateway: An API in Your Domain's Language](https://matlus.com/writing/gateway-design-pattern/).
+Read [The Gateway Design Pattern: Roles and Responsibilities](https://matlus.com/writing/gateway-design-pattern/).
 
 Find related articles and chapters in [Programming With Intent](https://matlus.com/pwi/).
